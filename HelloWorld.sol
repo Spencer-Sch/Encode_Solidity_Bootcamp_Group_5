@@ -26,8 +26,4 @@ contract HelloWorld {
     function transferOwnership(address newOwner) public onlyOwner {
         owner = newOwner;
     }
-
-    function getOwner() public view returns (address owner_) {
-        return owner;
-    }
 }
