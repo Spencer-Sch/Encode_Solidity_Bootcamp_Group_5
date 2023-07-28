@@ -7,6 +7,8 @@ interface IHelloWorld {
     function setText(string memory newText) external;
 
     function transferOwnership(address newOwner) external;
+
+    function getOwner() external returns (address);
 }
 
 contract Greeter {
@@ -22,5 +24,9 @@ contract Greeter {
 
     function changeOwner(address target, address newOwner) external {
         IHelloWorld(target).transferOwnership(newOwner);
+    }
+
+    function checkOwner(address target) external returns (address) {
+        return IHelloWorld(target).getOwner();
     }
 }
