@@ -12,7 +12,8 @@ or <br>
 
 ## .env
 
-- Be sure to add your wallet private key to the `.env`
+- rename `.example.env` to `.env`
+- add your wallet private key to the `.env`
 
 ## Project cmds
 
