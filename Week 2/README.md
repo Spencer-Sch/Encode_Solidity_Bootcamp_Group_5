@@ -10,6 +10,7 @@
     - list each script that will need to be written
     - sudo code these scripts
     - assign members to write scripts
+        - THOUGHT: tests should be used to both assist in development of scripts and to confirm scripts are working locally before final use on blockchain
 
 - Final Homework Goal:
     - Deploy Ballot.sol (only one member needs to deploy. this member will be the "chairperson")
