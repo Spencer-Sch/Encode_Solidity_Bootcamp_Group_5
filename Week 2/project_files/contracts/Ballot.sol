@@ -59,10 +59,16 @@ contract Ballot {
         // explanation about what went wrong.
         require(
             msg.sender == chairperson,
-            "Only chairperson can give right to vote."
+            "giveRightToVote__Only chairperson can give right to vote."
         );
-        require(!voters[voter].voted, "The voter already voted.");
-        require(voters[voter].weight == 0);
+        require(
+            !voters[voter].voted,
+            "giveRightToVote__The voter already voted."
+        );
+        require(
+            voters[voter].weight == 0,
+            "giveRightToVote__Account already has right to vote"
+        );
         voters[voter].weight = 1;
     }
 
@@ -93,7 +99,7 @@ contract Ballot {
         Voter storage delegate_ = voters[to];
 
         // Voters cannot delegate to accounts that cannot vote.
-        require(delegate_.weight >= 1);
+        require(delegate_.weight >= 1, "delegate__delegate's weight is 0");
 
         // Since `sender` is a reference, this
         // modifies `voters[msg.sender]`.
