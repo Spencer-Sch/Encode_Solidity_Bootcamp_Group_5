@@ -2,8 +2,6 @@ import { ethers } from "hardhat";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-// command to execute script:
-// yarn ts-node --files ./scripts/GiveRightToVote.ts <voterAddress> <voterAddress> <voterAddress>
 
 function setupProvider() {
   const provider = new ethers.InfuraProvider("sepolia");
@@ -14,10 +12,18 @@ async function giveRightToVote() {
   // contract address
   const ballotAddress = "0xF4c6d10D4568f6CD84FfEe1A28754388182EFA47"
 
-  // un-comment below if you want to pass addresses as arguments to the terminal command
+  //////////////////////////////////////
+  // option 1
+  // un-comment one line below if you want to pass addresses as arguments to the terminal command
   // const voterAddresses = process.argv.slice(2);
+  //
+  // use command:
+  // yarn ts-node --files ./scripts/GiveRightToVote.ts 0x6F118Fe8Dd5DD12A4c6ff9359750c503a2dF667C 0x09FA6695dD0338FF8e9E1b2c3209fFf2161D9034 0x5A513334f88ECFdD46EC25E336f9cBf52E52887C 0xD04AD68A92F3C724a274789a4F13A92b01286A40 0xb54Bc3B7735de07c0c91DD595Eb0B2Cf9e8f37D6 0x8f741CE8580ad892D875Ca590a5d83A27B24fb3b
+  //////////////////////////////////////
 
-  // un-comment below to give voting rights to all group members
+  //////////////////////////////////////
+  // option 2
+  // un-comment array below to give voting rights to all group members
   // const voterAddresses = [
   //   "0x6F118Fe8Dd5DD12A4c6ff9359750c503a2dF667C",
   //   "0x09FA6695dD0338FF8e9E1b2c3209fFf2161D9034",
@@ -26,6 +32,10 @@ async function giveRightToVote() {
   //   "0xb54Bc3B7735de07c0c91DD595Eb0B2Cf9e8f37D6",
   //   "0x8f741CE8580ad892D875Ca590a5d83A27B24fb3b",
   // ]
+  //
+  // use command:
+  // yarn ts-node --files ./scripts/GiveRightToVote.ts
+  //////////////////////////////////////
 
   // get user wallet
   const provider = setupProvider()
