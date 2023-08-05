@@ -6,7 +6,7 @@ dotenv.config();
 // yarn ts-node --files ./scripts/GiveRightToVoteLocal.ts <voterAddress> <voterAddress> <voterAddress>
 
 async function giveRightToVoteLocal() {
-  // const voterAddress = process.argv[2];
+  // const voterAddresses = process.argv.slice(2);
   
   const accounts = await ethers.getSigners()
   const signer = accounts[0] // chairperson
