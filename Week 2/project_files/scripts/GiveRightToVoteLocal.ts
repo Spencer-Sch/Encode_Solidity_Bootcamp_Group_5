@@ -6,14 +6,14 @@ dotenv.config();
 // yarn ts-node --files ./scripts/GiveRightToVoteLocal.ts <voterAddress> <voterAddress> <voterAddress>
 
 async function giveRightToVoteLocal() {
-  // const voterAddresses = process.argv.slice(2);
+  const voterAddresses = process.argv.slice(2);
   
   const accounts = await ethers.getSigners()
   const signer = accounts[0] // chairperson
-  const voter1 = accounts[1]
-  const voter2 = accounts[2]
+  // const voter1 = accounts[1]
+  // const voter2 = accounts[2]
   // const voterAddress = await voter.getAddress()
-  const voterAddresses = [voter1.address, voter2.address]
+  // const voterAddresses = [voter1.address, voter2.address]
 
   const proposals = ["prop1", "prop2", "prop3"]
   proposals.forEach((element, index) => {
