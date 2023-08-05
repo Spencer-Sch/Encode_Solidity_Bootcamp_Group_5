@@ -5,6 +5,9 @@ dotenv.config();
 // command to execute script:
 // yarn ts-node --files ./scripts/Delegate.ts <toAddress>
 
+// command to spin up local node
+// yarn hardhat node
+
 async function delegateLocal() {
   const toAddress = process.argv[2];
 
