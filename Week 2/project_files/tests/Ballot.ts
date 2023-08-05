@@ -80,16 +80,55 @@ describe('Ballot', function () {
 
     describe("when the chairperson interacts with the giveRightToVote function in the contract", async () => {
       it("gives right to vote for another address", async () => {
-        // TODO
-        throw Error("Not implemented");
+        // get chairperson
+        const chairpersonSigner = await accounts[0]
+        // get "member"
+        const memberAccount = accounts[1]
+        // get "member" address
+        const memberAddress = await memberAccount.getAddress()
+        // connect chairperson to contract
+        ballotContract.connect(chairpersonSigner)
+        // give right to vote to "member"
+        await ballotContract.giveRightToVote(memberAddress)
+        // get voter structs from mapping
+        const voter = await ballotContract.voters(memberAccount)
+        expect(voter.weight).to.equal(1)
       });
-      it("can not give right to vote for someone that has voted", async () => {
-        // TODO
-        throw Error("Not implemented");
+      it("can not give right to vote to someone that has already voted", async () => {
+        // get chairperson
+        const chairpersonSigner = await accounts[0]
+        // get "member"
+        const memberAccount = accounts[1]
+        // get "member" address
+        const memberAddress = await memberAccount.getAddress()
+        // connect chairperson to contract
+        ballotContract.connect(chairpersonSigner)
+        // give right to vote to "member"
+        await ballotContract.giveRightToVote(memberAddress)
+        // "member" votes
+        ballotContract.connect(memberAccount)
+        ballotContract.vote(0)
+        // give right to vote again
+        ballotContract.connect(chairpersonSigner)
+        // expect giveRightToVote to fail
+        const res = await ballotContract.giveRightToVote(memberAddress)
+        console.log(res)
+        // expect(await ballotContract.giveRightToVote(memberAddress)).to.be.revertedWith()
       });
-      it("can not give right to vote for someone that has already voting rights", async () => {
-        // TODO
-        throw Error("Not implemented");
+      it("can not give right to vote to someone twice", async () => {
+        // get chairperson
+        const chairpersonSigner = await accounts[0]
+        // get "member"
+        const memberAccount = accounts[1]
+        // get "member" address
+        const memberAddress = await memberAccount.getAddress()
+        // connect chairperson to contract
+        ballotContract.connect(chairpersonSigner)
+        // give right to vote to "member"
+        await ballotContract.giveRightToVote(memberAddress)
+        // give right to vote again
+        // expect giveRightToVote to fail
+        // expect(await ballotContract.giveRightToVote(memberAddress)).to.be.revertedWithoutReason()
       });
     });
 
@@ -101,8 +140,16 @@ describe('Ballot', function () {
     });
 
     describe("when the voter interacts with the delegate function in the contract", async () => {
-      // TODO
+        // get contract
+        // get chairperson
+        // get "member1"
+        // get "member2"
+        // connect chairperson to contract
+        // give right to "member1"
+        // give right to "member2"
       it("should transfer voting power", async () => {
+        // connect "member1" to contract
+        // expect "member1" delegates to "member2" to succeed
         throw Error("Not implemented");
       });
     });
@@ -122,8 +169,11 @@ describe('Ballot', function () {
     });
 
     describe("when an account without right to vote interacts with the delegate function in the contract", async () => {
-      // TODO
+      // get contract
+      // get "member1"
+      // get "member2"
       it("should revert", async () => {
+        // expect "member1" delegates to "member2" to fail
         throw Error("Not implemented");
       });
     });
