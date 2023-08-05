@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // command to execute script:
-// yarn ts-node --files ./scripts/GiveRightToVoteLocal.ts <voterAddress> <voterAddress> <voterAddress>
+// yarn ts-node --files ./scripts/BROKEN_GiveRightToVoteLocal.ts <voterAddress> <voterAddress> <voterAddress>
 
 async function giveRightToVoteLocal() {
   const voterAddresses = process.argv.slice(2);
