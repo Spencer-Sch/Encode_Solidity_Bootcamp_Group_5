@@ -31,8 +31,7 @@ async function main() {
 
   const contractInstance = new ethers.Contract(contractAddress, BallotArtifact.abi, wallet);
 
-  // Assuming vote is a transaction, you'll want to await it and possibly handle the receipt
-  const tx = await contractInstance.vote(0);
+  const tx = await contractInstance.vote(0);//0,1,2,3
   console.log("Transaction sent:", tx.hash);
 
   // Wait for it to be mined
