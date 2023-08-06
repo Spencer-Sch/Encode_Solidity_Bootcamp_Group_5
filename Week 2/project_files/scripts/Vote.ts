@@ -2,6 +2,9 @@ import { ethers } from "ethers";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+// command to execute script:
+// yarn ts-node --files ./scripts/Vote.ts <flavor>
+
 // ABIs
 import BallotArtifact from '../artifacts/contracts/Ballot.sol/Ballot.json' 
 
@@ -19,7 +22,7 @@ function setupProvider() {
 }
 
 async function main() {
-
+  const flavor = process.argv[2];
   const provider = setupProvider()
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "", provider)
   const balanceBN = await provider.getBalance(wallet.address);
@@ -31,7 +34,7 @@ async function main() {
 
   const contractInstance = new ethers.Contract(contractAddress, BallotArtifact.abi, wallet);
 
-  const tx = await contractInstance.vote(0);//0,1,2,3
+  const tx = await contractInstance.vote(flavor);//0,1,2,3
   console.log("Transaction sent:", tx.hash);
 
   // Wait for it to be mined
