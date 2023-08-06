@@ -13,6 +13,13 @@ const provider = new ethers.InfuraProvider("sepolia");
 
 const contractAddress = "0xF4c6d10D4568f6CD84FfEe1A28754388182EFA47";
 
+const flavorMapping: { [key: string]: number } = {
+  "Orange": 0,
+  "Lemon": 1,
+  "Cola": 2,
+  "Pineapple": 3,
+};
+
 function setupProvider() {
   // https://docs.ethers.org/v6/api/providers/
   // const provider = ethers.getDefaultProvider("sepolia")
@@ -34,7 +41,7 @@ async function main() {
 
   const contractInstance = new ethers.Contract(contractAddress, BallotArtifact.abi, wallet);
 
-  const tx = await contractInstance.vote(flavor);//0,1,2,3
+  const tx = await contractInstance.vote(flavorMapping[flavor]);//0,1,2,3
   console.log("Transaction sent:", tx.hash);
 
   // Wait for it to be mined
