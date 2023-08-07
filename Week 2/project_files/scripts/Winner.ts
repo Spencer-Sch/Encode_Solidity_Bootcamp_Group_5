@@ -18,8 +18,6 @@ function setupProvider() {
   return provider
 }
 
-
-
 async function main() {
 
   const provider = setupProvider()
