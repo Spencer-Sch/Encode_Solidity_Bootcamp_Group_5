@@ -37,7 +37,7 @@ async function main() {
   console.log("Winning Proposal:", winningProposal.toString()); //could do a map here if we wanted
 
   const winnerName = await contractInstance.winnerName();
-  console.log("Winner Name:", winnerName); //
+  console.log("Winner Name:", ethers.decodeBytes32String(winnerName)); //
 
 }
 
