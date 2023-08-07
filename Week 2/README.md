@@ -3,14 +3,12 @@
 ## The Plan
 
 - Pre-work:
-    - Make sure everyone's `deployWithEthers.ts` works
     - come up with a list of proposals to pass when initiating `Ballot.sol`
 
 - Steps:
     - list each script that will need to be written
     - sudo code these scripts
     - assign members to write scripts
-        - THOUGHT: tests should be used to both assist in development of scripts and to confirm scripts are working locally before final use on blockchain
 
 - Final Homework Goal:
     - Deploy Ballot.sol (only one member needs to deploy. this member will be the "chairperson")
@@ -24,13 +22,7 @@
         - call `winnerName()`
 
 ## Final Report
-
-### What we did
-
-- List the actions taken by the team and their results <br>
-TODO...
-
 ### Transaction documentation
 
 Google Sheet <br>
-TODO...
+https://docs.google.com/spreadsheets/d/1v6jiUeT046FP66n2ekbfar94t11zWTusxBKAtxlNAWA/edit?usp=sharing
