@@ -5,7 +5,7 @@ interface IMyToken {
     function getPastVotes(address, uint256) external view returns (uint256);
 }
 
-/// @title Voting with delegation.
+/// @title Voting with ERC20 Tokens
 contract TokenizedBallot {
     struct Proposal {
         bytes32 name; // short name (up to 32 bytes)
@@ -16,6 +16,9 @@ contract TokenizedBallot {
     IMyToken public tokenContract;
     uint256 public targetBlockNumber;
     mapping(address => uint256) public votingPowerSpent;
+
+    // Events
+    event Vote(uint indexed proposal, uint indexed amount);
 
     constructor(
         bytes32[] memory proposalNames,
@@ -37,10 +40,10 @@ contract TokenizedBallot {
         );
         votingPowerSpent[msg.sender] += amount;
         proposals[proposal].voteCount += amount;
+        emit Vote(proposal, amount);
     }
 
     function votingPower(address account) public view returns (uint256) {
-        //
         return tokenContract.getPastVotes(account, targetBlockNumber) - votingPowerSpent[account];
     }
 
