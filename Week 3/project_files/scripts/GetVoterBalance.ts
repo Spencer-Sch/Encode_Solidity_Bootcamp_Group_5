@@ -8,7 +8,9 @@ function setupProvider() {
 }
 
 async function getVoterBalance() {
+    // NOTICE: used for interacting with test contract on Sepolia
     const MyTokenContractAddress = process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
+    // NOTICE: used for interacting with REAL contract on sepolia
     // const MyTokenContractAddress = "hardcode contract address here"
 
     //////////////////////////////////////
