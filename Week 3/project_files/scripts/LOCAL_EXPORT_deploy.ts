@@ -1,14 +1,9 @@
 import { ethers } from 'hardhat'
 
-// yarn ts-node --files ./scripts/LOCAL_deploy.ts op1 op2 op3
-
 // NOTICE: This script is being used inside of LOCAL_mint.ts to deploy contracts before minting.
 // NOTICE: This script IS NOT meant to be used directly
-export async function _deploy(proposalsArg: string[]) {
-    // export async function deploy(proposalsArg: string[] | null = null) {
+export async function _deploy(proposalsArg: string[], blockNumberExtra = 100000) {
     let proposals = proposalsArg
-    // let proposals = proposalsArg || process.argv.slice(2)
-    // const proposals = process.argv.slice(2)
 
     console.log('Deploying MyToken contract')
     const myTokenFactory = await ethers.getContractFactory('MyToken')
@@ -34,7 +29,7 @@ export async function _deploy(proposalsArg: string[]) {
     const ballotContract = await ballotFactory.deploy(
         proposals.map(ethers.encodeBytes32String),
         myTokenContractAddress,
-        lastBlockNumber + 100000 // ???
+        lastBlockNumber + blockNumberExtra // ???
     )
     await ballotContract.waitForDeployment()
     const ballotContractAddress = await ballotContract.getAddress()
@@ -42,10 +37,5 @@ export async function _deploy(proposalsArg: string[]) {
     console.log(`TokenizedBallot contract deployed at address: ${ballotContractAddress}`)
 
     console.log('---------------------------------')
-    return { myTokenContract, myTokenContractAddress, ballotContract, ballotContractAddress }
+    return [myTokenContractAddress, ballotContractAddress]
 }
-
-// _deploy().catch((error) => {
-//     console.error(error)
-//     process.exitCode = 1
-// })

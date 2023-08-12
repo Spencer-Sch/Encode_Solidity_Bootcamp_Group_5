@@ -15,8 +15,12 @@ async function mint() {
     // const toAccount = process.argv[2]
     const [deployer, acc1, acc2] = await ethers.getSigners()
 
+    let myTokenContractAddress: string
+
     // deploy both contracts
-    const { myTokenContract } = await _deploy(PROPOSALS)
+    ;[myTokenContractAddress] = await _deploy(PROPOSALS)
+
+    const myTokenContract = await ethers.getContractAt('MyToken', myTokenContractAddress)
 
     // get acc1 balance before mint
     const acc1BalanceBeforeBN = await myTokenContract.balanceOf(acc1.address)
