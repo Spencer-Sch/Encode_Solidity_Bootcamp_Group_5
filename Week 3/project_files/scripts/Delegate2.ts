@@ -13,7 +13,7 @@ async function delegate() {
     //const voterAddresses = process.argv.slice(2)
     //
     // use command:
-    // yarn ts-node --files ./scripts/Delegate.ts <SOME WALLET HERE>
+    // yarn ts-node --files ./scripts/Delegate2.ts <SOME WALLET HERE>
     //////////////////////////////////////
 
     function setupProvider() {
