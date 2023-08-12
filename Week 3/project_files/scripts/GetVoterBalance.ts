@@ -2,16 +2,16 @@ import { ethers } from 'hardhat'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
+// yarn ts-node --files ./scripts/GetVoterBalance.ts <address>
+
 function setupProvider() {
     const provider = new ethers.InfuraProvider('sepolia')
     return provider
 }
 
 async function getVoterBalance() {
-    // NOTICE: used for interacting with test contract on Sepolia
-    const MyTokenContractAddress = process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
-    // NOTICE: used for interacting with REAL contract on sepolia
-    // const MyTokenContractAddress = "hardcode contract address here"
+    const MyTokenContractAddress =
+        process.env.MY_TOKEN_CONTRACT_ADDRESS ?? process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
     //////////////////////////////////////
     // option 1
@@ -52,6 +52,7 @@ async function getVoterBalance() {
     // get deployed contract
     const myTokenContract = await ethers.getContractAt('MyToken', MyTokenContractAddress, wallet)
 
+    console.log('getting balance...')
     for (let i = 0; i < voterAddresses.length; i++) {
         // confirm each voter exists in the voters mapping
         console.log(

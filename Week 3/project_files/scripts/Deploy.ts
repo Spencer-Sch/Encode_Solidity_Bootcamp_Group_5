@@ -46,7 +46,7 @@ async function deploy() {
     const ballotContract = await ballotContractFactory.deploy(
         proposals.map(ethers.encodeBytes32String),
         myTokenContractAddress,
-        lastBlockNumber + 200000
+        lastBlockNumber + 100000 // ????
     )
     await ballotContract.waitForDeployment()
     const ballotContractAddress = await ballotContract.getAddress()

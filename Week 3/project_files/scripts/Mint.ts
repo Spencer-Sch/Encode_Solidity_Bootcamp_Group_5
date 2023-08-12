@@ -8,10 +8,8 @@ function setupProvider() {
 }
 
 async function mint() {
-    // NOTICE: used for interacting with test contract on Sepolia
-    const MyTokenContractAddress = process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
-    // NOTICE: used for interacting with REAL contract on sepolia
-    // const MyTokenContractAddress = "hardcode contract address here"
+    const MyTokenContractAddress =
+        process.env.MY_TOKEN_CONTRACT_ADDRESS ?? process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
     const MINT_VALUE = ethers.parseUnits('1')
 
@@ -41,6 +39,8 @@ async function mint() {
     // yarn ts-node --files ./scripts/Mint.ts
     //////////////////////////////////////
 
+    console.log('---------------------------------')
+
     // get user wallet
     const provider = setupProvider()
     const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? '', provider)
@@ -59,7 +59,7 @@ async function mint() {
         console.log(`mint tokens for voter ${i}: ${voterAddresses[i]}`)
         // mint tokens for voter
         const mintTx = await myTokenContract.mint(voterAddresses[i], MINT_VALUE)
-        mintTx.wait()
+        await mintTx.wait(2)
     }
 
     for (let i = 0; i < voterAddresses.length; i++) {
@@ -69,6 +69,7 @@ async function mint() {
             (await myTokenContract.balanceOf(voterAddresses[i])).toString()
         )
     }
+    console.log('---------------------------------')
 }
 
 mint().catch((error) => {
