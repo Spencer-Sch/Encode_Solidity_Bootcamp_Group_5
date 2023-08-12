@@ -52,37 +52,6 @@ async function delegate() {
 
   const votesAfter = await myTokenContract.getVotes(`${wallet.address}`);
   console.log(`Voting power after delegating: ${votesAfter}`);
-
-
-
-
-  /* 
-  console.log(`Connected to the acount of address ${signer.address}\nThis account has a balance of ${balanceBN.toString()} Wei`);
-  const args = process.argv;
-  const params = args.slice(2);
-  const contractAddress = params[0];
-  const delegateeAddress = params[1];
-  if (contractAddress === undefined || contractAddress === '') {
-    throw "make sure CONTRACT address is set in the .env file";
-  }
-
-  console.log(`Attaching GTET token to contract`);
-  let tokenizedBallotContract: GroupTenToken;
-  const tokenizedBallotContractFactory = new GroupTenToken__factory(signer);
-  tokenizedBallotContract = tokenizedBallotContractFactory.attach(contractAddress);
-
-  console.log(`Delegating voting right from ${signer.address} to
-              ${delegateeAddress}`);
-  const delegateTx = await tokenizedBallotContract.delegate(delegateeAddress);
-  await delegateTx.wait();
-  const votePower = await tokenizedBallotContract.getVotes(delegateeAddress);
-  console.log(
-    `Voting delegated\n
-    from: ${signer.address}\n
-    to: ${delegateeAddress}\n
-    with voting power of ${votePower}`
-  );
- */
 }
 
 delegate().catch((error) => {
