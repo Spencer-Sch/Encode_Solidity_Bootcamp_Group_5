@@ -12,8 +12,7 @@ function setupProvider() {
 async function delegate() {
     const toAddress = process.argv[2]
 
-    const MyTokenContractAddress =
-        process.env.MY_TOKEN_CONTRACT_ADDRESS ?? process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
+    const MyTokenContractAddress = process.env.MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
     console.log('---------------------------------')
 

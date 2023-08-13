@@ -10,8 +10,7 @@ function setupProvider() {
 }
 
 async function getVoterBalance() {
-    const MyTokenContractAddress =
-        process.env.MY_TOKEN_CONTRACT_ADDRESS ?? process.env.TEST_MY_TOKEN_CONTRACT_ADDRESS ?? ''
+    const MyTokenContractAddress = process.env.MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
     //////////////////////////////////////
     // option 1
