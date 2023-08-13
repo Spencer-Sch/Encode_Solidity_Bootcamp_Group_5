@@ -1,30 +1,37 @@
-import { ethers } from 'hardhat';
-import { expect } from 'chai';
-import * as dotenv from 'dotenv';
+import { ethers } from 'hardhat'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-dotenv.config();
+function setupProvider() {
+    const provider = new ethers.InfuraProvider('sepolia')
+    return provider
+}
 
-describe('TokenizedBallot', function () {
-  it('should return the winning proposal', async function () {
-    // Deploy the contract
-    const TokenizedBallot = await ethers.getContractFactory('TokenizedBallot');
-    const tokenizedBallot = await TokenizedBallot.deploy();
-    await tokenizedBallot.deployed();
+async function getWinner() {
+    const provider = setupProvider()
 
-    // Perform the vote
-    const proposal1 = 'Proposal 1';
-    const proposal2 = 'Proposal 2';
-    const proposal3 = 'Proposal 3';
+    const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? '', provider)
+    const balanceBN = await provider.getBalance(wallet.address)
+    const balance = Number(ethers.formatUnits(balanceBN))
+    console.log(`Wallet balance ${balance}`)
+    if (balance < 0.01) {
+        throw new Error('Not enough ether')
+    }
+    console.log('---------------------------------')
 
-    await tokenizedBallot.vote(0, proposal1);
-    await tokenizedBallot.vote(1, proposal2);
-    await tokenizedBallot.vote(2, proposal3);
+    // Get deployed contract
+    const ballotContract = await ethers.getContractAt(
+        'TokenizedBallot',
+        process.env.TOKENIZED_BALLOT_CONTRACT_ADDRESS ?? '',
+        wallet
+    )
 
-    // Get the winning proposal
-    const winningProposal = await tokenizedBallot.getWinningProposal();
-    const winningProposalName = await tokenizedBallot.proposals(winningProposal);
+    const winningProposalBytes32 = await ballotContract.winnerName()
+    const winningProposalString = ethers.decodeBytes32String(winningProposalBytes32)
+    console.log(`The winning proposal is: ${winningProposalString}`)
+}
 
-    // Assert the result
-    expect(winningProposalName).to.equal(proposal1);
-  });
-});
+getWinner().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+})
