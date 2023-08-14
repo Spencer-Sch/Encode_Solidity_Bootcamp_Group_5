@@ -28,7 +28,7 @@ async function deployTokenizedBallot() {
     )
     await ballotContract.waitForDeployment()
 
-    const ballotContractAddress = ballotContract.getAddress()
+    const ballotContractAddress = await ballotContract.getAddress()
     console.log(`TokenizedBallot contract deployed to address: ${ballotContractAddress}`)
 
     console.log('Deployment completed successfully!')
