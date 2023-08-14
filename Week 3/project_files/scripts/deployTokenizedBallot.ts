@@ -24,7 +24,7 @@ async function deployTokenizedBallot() {
     const ballotContract = await ballotContractFactory.deploy(
         proposals.map(ethers.encodeBytes32String),
         process.env.MY_TOKEN_CONTRACT_ADDRESS ?? '',
-        lastBlockNumber + 100000
+        lastBlockNumber
     )
     await ballotContract.waitForDeployment()
 
