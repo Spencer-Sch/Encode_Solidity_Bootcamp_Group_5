@@ -2,6 +2,8 @@ import { ethers } from 'hardhat'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
+// yarn ts-node --files ./scripts/getWinningProposal.ts
+
 function setupProvider() {
     const provider = new ethers.InfuraProvider('sepolia')
     return provider
