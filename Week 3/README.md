@@ -2,30 +2,40 @@
 
 ## The Plan
 
-- Pre-work:
-    - Come up with a list of proposals to pass when initiating `TokenizedBallot.sol`
+### Contract Purpose:
+    - `MyToken` in `ERC20Votes.sol` is the token that gives voting power
+    - `TokenizedBallot.sol` is the contract voters will interact with to vote
 
-- Steps:
-    - Complete `TokenizedBallot.sol` & `ERC20Votes.sol`
-    - List each script that will need to be written
-    - Sudo code these scripts
-    - Assign members to write scripts
+### Pre-work:
+    - Come up with a list of proposals to pass when initiating `TokenizedBallot.sol` ✅
+        - Online book club reading themes
+            1. Historical Fiction
+            2. Self-Help
+            3. Fantasy Worlds
+            4. Classic Literature
 
-- Final Homework Goal:
-    - Deploy `ERC20Votes.sol` (only one member needs to deploy. This member will be have "MINTER_ROLE")
-        - Member with "MINTER_ROLE" will mint and send tokens to other members.
-        - Each member will need to self delegate
-    - Deploy `TokenizedBallot.sol` (only one member needs to deploy)
+### Steps
+    - Complete `TokenizedBallot.sol` ✅
+        - add event to be emited when a vote is cast ✅
+    - List each script that will need to be written ✅
+    - Sudo code these scripts ✅
+    - Group members write scripts ✅
+
+### Final Homework Goal:
+    - Deploy `ERC20Votes.sol` (only one member needs to deploy. This member will be have "MINTER_ROLE") ✅
+        - Member with "MINTER_ROLE" will mint and send tokens to other members. ✅
+        - Each member will need to self delegate ✅
+    - Deploy `TokenizedBallot.sol` (only one member needs to deploy) ✅
     - Record transactions for following actions:
-        - deployment
-        - "MINTER_ROLE" minting tokens to members
-        - some members vote
-        - some members transfer tokens to other members
-        - call `winningProposal()`
-        - call `winnerName()`
+        - Deploy `ERC20Votes.sol` ✅
+        - "MINTER_ROLE" mints tokens to members ✅
+        - Self-delgation ✅
+        - Deploy `TokenizedBallot.sol` ✅
+        - Members vote ✅
+        - call `winnerName()` ✅
 
 ## Final Report
 ### Transaction documentation
 
 Google Sheet <br>
-- ToDo
+https://docs.google.com/spreadsheets/u/1/d/1zPoj-vmSNPb0iLy3ADYhbPrQ_bc0fOq0W5JIMZhSv8w/edit#gid=0
