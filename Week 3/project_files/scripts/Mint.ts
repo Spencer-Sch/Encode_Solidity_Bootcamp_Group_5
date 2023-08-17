@@ -38,7 +38,7 @@ async function mint() {
     // yarn ts-node --files ./scripts/Mint.ts
     //////////////////////////////////////
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // get user wallet
     const provider = setupProvider()
@@ -68,7 +68,7 @@ async function mint() {
             (await myTokenContract.balanceOf(voterAddresses[i])).toString()
         )
     }
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 }
 
 mint().catch((error) => {

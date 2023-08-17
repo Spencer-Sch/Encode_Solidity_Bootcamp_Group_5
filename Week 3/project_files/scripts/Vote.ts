@@ -38,7 +38,7 @@ async function vote() {
 
     const tokenizedBallotContractAddress = process.env.TOKENIZED_BALLOT_CONTRACT_ADDRESS ?? ''
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // get user wallet
     const provider = setupProvider()
@@ -58,7 +58,7 @@ async function vote() {
     )
 
     // Check Proposal Vote Counts Before
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
     console.log('Vote counts before vote')
     for (let index = 0; index < 4; index++) {
         const proposal = await tokenizedBallotContract.proposals(index)
@@ -75,7 +75,7 @@ async function vote() {
     await voteTx.wait(2)
 
     // Check Proposal Vote Counts After
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
     console.log('Vote counts after vote')
     for (let index = 0; index < 4; index++) {
         const proposal = await tokenizedBallotContract.proposals(index)
@@ -85,7 +85,7 @@ async function vote() {
             )} has ${proposal.voteCount.toString()} votes`
         )
     }
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 }
 
 vote().catch((error) => {

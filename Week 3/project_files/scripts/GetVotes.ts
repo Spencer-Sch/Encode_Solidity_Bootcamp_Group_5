@@ -14,7 +14,7 @@ async function getVotes() {
 
     const MyTokenContractAddress = process.env.MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // get user wallet
     const provider = setupProvider()
@@ -29,13 +29,13 @@ async function getVotes() {
     // get deployed contract
     const myTokenContract = await ethers.getContractAt('MyToken', MyTokenContractAddress, wallet)
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // Check Voting Power
     const votes = await myTokenContract.getVotes(toAddress)
     console.log(`Account ${toAddress} has ${votes.toString()} units of voting power\n`)
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 }
 
 getVotes().catch((error) => {

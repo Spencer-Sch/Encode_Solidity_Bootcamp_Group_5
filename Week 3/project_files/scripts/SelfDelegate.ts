@@ -14,7 +14,7 @@ async function delegate() {
 
     const MyTokenContractAddress = process.env.MY_TOKEN_CONTRACT_ADDRESS ?? ''
 
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // get user wallet
     const provider = setupProvider()
@@ -45,7 +45,7 @@ async function delegate() {
     console.log(
         `Account ${toAddress} has ${votesAfter.toString()} units of voting power after self delegating\n`
     )
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 }
 
 delegate().catch((error) => {

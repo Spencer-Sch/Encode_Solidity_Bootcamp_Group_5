@@ -19,7 +19,7 @@ async function getWinner() {
     if (balance < 0.01) {
         throw new Error('Not enough ether')
     }
-    console.log('---------------------------------')
+    console.log('-'.repeat(process.stdout.columns))
 
     // Get deployed contract
     const ballotContract = await ethers.getContractAt(
