@@ -1,0 +1,22 @@
+➤ YN0027: @types/mocha@@unknown can't be resolved to a satisfying range
+➤ YN0035: The remote server failed to provide the requested resource
+➤ YN0035:   Response Code: 404 (Not Found)
+➤ YN0035:   Request Method: GET
+➤ YN0035:   Request URL: https://registry.yarnpkg.com/@types%2fmocha@
+➤ YN0027: @types/node@@unknown can't be resolved to a satisfying range
+➤ YN0035: The remote server failed to provide the requested resource
+➤ YN0035:   Response Code: 404 (Not Found)
+➤ YN0035:   Request Method: GET
+➤ YN0035:   Request URL: https://registry.yarnpkg.com/@types%2fnode@
+➤ YN0027: ts-node@@unknown can't be resolved to a satisfying range
+➤ YN0035: The remote server failed to provide the requested resource
+➤ YN0035:   Response Code: 404 (Not Found)
+➤ YN0035:   Request Method: GET
+➤ YN0035:   Request URL: https://registry.yarnpkg.com/ts-node@
+➤ YN0027: typescript@@unknown can't be resolved to a satisfying range
+➤ YN0035: The remote server failed to provide the requested resource
+➤ YN0035:   Response Code: 404 (Not Found)
+➤ YN0035:   Request Method: GET
+➤ YN0035:   Request URL: https://registry.yarnpkg.com/typescript@
+
+➤ Errors happened when preparing the environment required to run this command.

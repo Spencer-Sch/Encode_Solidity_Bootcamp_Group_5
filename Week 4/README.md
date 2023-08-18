@@ -1,4 +1,4 @@
-# Week 4 weekend homework - TokenizedBallot Frontend
+# Week 4 weekend homework - TokenizedBallot Frontend + API
 
 ## The Plan
 
