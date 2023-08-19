@@ -3,7 +3,7 @@ import { MyToken__factory } from '../typechain-types'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-// yarn ts-node --files ./scripts/deployMyToken.ts
+// npx ts-node --files ./scripts/deployMyToken.ts
 
 function setupProvider() {
     const provider = new ethers.InfuraProvider('sepolia')
