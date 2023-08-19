@@ -9,13 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MintTokenDto = void 0;
+exports.MintTokenReturnDto = exports.MintTokenBodyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-class MintTokenDto {
+class MintTokenBodyDto {
 }
-exports.MintTokenDto = MintTokenDto;
+exports.MintTokenBodyDto = MintTokenBodyDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ type: String, required: true, default: 'My address' }),
+    (0, swagger_1.ApiProperty)({ type: String, required: true, default: '' }),
     __metadata("design:type", String)
-], MintTokenDto.prototype, "address", void 0);
+], MintTokenBodyDto.prototype, "address", void 0);
+class MintTokenReturnDto {
+}
+exports.MintTokenReturnDto = MintTokenReturnDto;
 //# sourceMappingURL=mintToken.dto.js.map

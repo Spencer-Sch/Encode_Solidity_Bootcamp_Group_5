@@ -4,15 +4,19 @@ export declare class AppService {
     provider: ethers.Provider;
     wallet: ethers.Wallet;
     constructor();
-    getHello(): string;
-    getAnotherThing(): string;
-    getContractAddress(): {
-        address: string;
-    };
-    getTotalSupply(): Promise<any>;
-    getTokenBalance(address: string): Promise<any>;
     mintTokens(address: string): Promise<{
         result: boolean;
-        tx: any;
+        tx: string;
+        to: string;
+        from: string;
+        gasUsed: string;
+        error?: undefined;
+    } | {
+        result: boolean;
+        error: any;
+        tx?: undefined;
+        to?: undefined;
+        from?: undefined;
+        gasUsed?: undefined;
     }>;
 }

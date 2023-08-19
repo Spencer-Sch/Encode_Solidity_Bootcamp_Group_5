@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import * as tokenJson from './assets/MyToken.json'
-import { ethers } from 'ethers'
+import { ContractTransactionReceipt, ethers } from 'ethers'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
 const CONTRACT_ADDRESS = process.env.MY_TOKEN_CONTRACT_ADDRESS ?? ''
+const MINT_VALUE = ethers.parseUnits('1')
 
 @Injectable()
 export class AppService {
@@ -18,29 +19,28 @@ export class AppService {
         this.contract = new ethers.Contract(CONTRACT_ADDRESS, tokenJson.abi, this.wallet)
     }
 
-    getHello(): string {
-        return 'Hello World!'
-    }
-
-    getAnotherThing(): string {
-        return 'Another thing'
-    }
-
-    getContractAddress(): { address: string } {
-        return { address: CONTRACT_ADDRESS }
-    }
-
-    getTotalSupply() {
-        return this.contract.totalSupply()
-    }
-
-    getTokenBalance(address: string) {
-        return this.contract.balanceOf(address)
-    }
+    // leave for future reference
+    // getTokenBalance(address: string) {
+    //     return this.contract.balanceOf(address)
+    // }
+    /////////////////////////
 
     async mintTokens(address: string) {
-        const tx = await this.contract.mint(address, 1n)
-        const receipt = await tx.wait(2)
-        return { result: true, tx: receipt.transactionHash //... }
+        try {
+            const tx = await this.contract.mint(address, MINT_VALUE)
+            const receipt: ContractTransactionReceipt = await tx.wait(2)
+            console.log('receipt: ', receipt)
+            return {
+                result: true,
+                tx: receipt.hash,
+                to: receipt.to,
+                from: receipt.from,
+                gasUsed: receipt.gasUsed.toString(),
+            }
+            // return { result: true }
+        } catch (err) {
+            console.error(err)
+            return { result: false, error: err }
+        }
     }
 }

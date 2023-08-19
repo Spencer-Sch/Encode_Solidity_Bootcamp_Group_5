@@ -16,24 +16,10 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const mintToken_dto_1 = require("./dtos/mintToken.dto");
+const swagger_1 = require("@nestjs/swagger");
 let AppController = exports.AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
-    }
-    getHello() {
-        return this.appService.getHello();
-    }
-    getAnotherThing() {
-        return this.appService.getAnotherThing();
-    }
-    getContractAdress() {
-        return this.appService.getContractAddress();
-    }
-    getTotalSupply() {
-        return this.appService.getTotalSupply();
-    }
-    getTokenBalance(address) {
-        return this.appService.getTokenBalance(address);
     }
     async mintTokens(body) {
         console.log({ body });
@@ -41,41 +27,23 @@ let AppController = exports.AppController = class AppController {
     }
 };
 __decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-__decorate([
-    (0, common_1.Get)('another-thing'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getAnotherThing", null);
-__decorate([
-    (0, common_1.Get)('contract-address'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
-], AppController.prototype, "getContractAdress", null);
-__decorate([
-    (0, common_1.Get)('total-supply'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getTotalSupply", null);
-__decorate([
-    (0, common_1.Get)('token-balance/:address'),
-    __param(0, (0, common_1.Param)('address')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getTokenBalance", null);
-__decorate([
     (0, common_1.Post)('mint-tokens'),
+    (0, swagger_1.ApiResponse)({
+        status: '2XX',
+        description: 'Mint Token TX Receipt',
+        schema: {
+            example: {
+                result: true,
+                tx: '',
+                to: '',
+                from: '',
+                gasUsed: '',
+            },
+        },
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [mintToken_dto_1.MintTokenDto]),
+    __metadata("design:paramtypes", [mintToken_dto_1.MintTokenBodyDto]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "mintTokens", null);
 exports.AppController = AppController = __decorate([
