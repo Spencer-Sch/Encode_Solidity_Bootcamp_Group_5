@@ -1,6 +1,7 @@
 import styles from './instructionsComponent.module.css'
 import { useAccount, useBalance, useNetwork, useSignMessage } from 'wagmi'
 import { useState, useEffect } from 'react'
+import * as myTokenJson from '@/assets/MyToken.json'
 
 export default function InstructionsComponent() {
     return (
