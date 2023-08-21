@@ -12,7 +12,16 @@ contract TokenizedBallot {
         uint voteCount; // number of accumulated votes
     }
 
+    /// @dev Voting logs to be displayed in frontend
+    struct VoteLog {
+        uint256 proposal;
+        address voter;
+        uint256 amount;
+        uint256 blockNumber;
+    }
+
     Proposal[] public proposals;
+    VoteLog[] public votes;
     IMyToken public tokenContract;
     uint256 public targetBlockNumber;
     mapping(address => uint256) public votingPowerSpent;
@@ -33,14 +42,22 @@ contract TokenizedBallot {
         }
     }
 
-    function vote(uint proposal, uint amount) external {
+    function vote(uint _proposal, uint amount) external {
         require(
             votingPower(msg.sender) >= amount,
             'TokenizedBallot: trying to vote more than allowed'
         );
         votingPowerSpent[msg.sender] += amount;
-        proposals[proposal].voteCount += amount;
-        emit Vote(proposal, amount);
+        proposals[_proposal].voteCount += amount;
+        votes.push(
+            VoteLog({
+                proposal: _proposal,
+                voter: msg.sender,
+                amount: amount,
+                blockNumber: block.number
+            })
+        );
+        emit Vote(_proposal, amount);
     }
 
     function votingPower(address account) public view returns (uint256) {
