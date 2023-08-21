@@ -2,6 +2,8 @@ import styles from './instructionsComponent.module.css'
 import { useAccount, useBalance, useNetwork, useSignMessage } from 'wagmi'
 import { useState, useEffect } from 'react'
 import * as myTokenJson from '@/assets/MyToken.json'
+import WalletInfo from '../WalletComponents/WalletInfo'
+import MyTokenContractActions from '../ContractActions/MyTokenContractActions'
 
 export default function InstructionsComponent() {
     return (
@@ -22,51 +24,11 @@ function PageBody() {
     return (
         <div>
             <WalletInfo></WalletInfo>
+            <MyTokenContractActions></MyTokenContractActions>
         </div>
     )
 }
 
-function WalletInfo() {
-    const { address, isConnecting, isDisconnected } = useAccount()
-    const { chain } = useNetwork()
-    if (address)
-        return (
-            <>
-                <p>Your account address is {address}</p>
-                <p>Connected to the network {chain?.name}</p>
-                <WalletBalance address={address}></WalletBalance>
-                <RequestTokens address={address}></RequestTokens>
-            </>
-        )
-    if (isConnecting)
-        return (
-            <>
-                <p> Loading...</p>
-            </>
-        )
-    if (isDisconnected)
-        return (
-            <>
-                <p> Wallet Disconnected</p>
-            </>
-        )
-    return (
-        <div>
-            <p>Please connect your wallet</p>
-        </div>
-    )
-}
-
-function WalletBalance(params: { address: any }) {
-    const { data, isError, isLoading } = useBalance({ address: params.address })
-    if (isLoading) return <div>Fetching balance…</div>
-    if (isError) return <div>Error fetching balance</div>
-    return (
-        <div>
-            Balance: {data?.formatted} {data?.symbol}
-        </div>
-    )
-}
 // function WalletAction() {
 //   const [signatureMessage, setSignatureMessage] = useState("");
 
@@ -98,55 +60,3 @@ function WalletBalance(params: { address: any }) {
 //     </div>
 //   );
 // }
-
-function RequestTokens(params: { address: string }) {
-    const [data, setData] = useState<{
-        result: string
-        tx: string
-        to: string
-        from: string
-        gasUsed: string
-    }>()
-    const [isLoading, setLoading] = useState(false)
-
-    const body = { address: params.address }
-
-    if (isLoading) return <p>Requesting tokens from API...</p>
-    if (!data)
-        return (
-            <button
-                onClick={() => {
-                    setLoading(true)
-                    fetch('http://localhost:3001/mint-tokens', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body),
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            setData(data)
-                            setLoading(false)
-                        })
-                }}
-            >
-                Request tokens
-            </button>
-        )
-
-    if (!data.result) {
-        return (
-            <div>
-                <p>Result from API: FAILED!</p>
-            </div>
-        )
-    }
-    return (
-        <div>
-            <p>Result from API: WORKED!</p>
-            <p>Transaction Hash: {data.tx}</p>
-            <p>Mint Tokens to: {data.to}</p>
-            <p>Mint Tokens from: {data.from}</p>
-            <p>Gas Used: {data.gasUsed}</p>
-        </div>
-    )
-}
