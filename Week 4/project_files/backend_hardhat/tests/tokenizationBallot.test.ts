@@ -5,6 +5,7 @@ import { HardhatEthersSigner } from '@nomicfoundation/hardhat-ethers/signers'
 import { TokenizedBallot } from '../typechain-types/contracts/TokenizedBallot.sol'
 import { MyToken } from '../typechain-types/contracts/ERC20Votes.sol'
 import { AddressLike, Block, BlockTag, ContractTransactionResponse } from 'ethers'
+import { log } from 'console'
 
 const PROPOSALS = ['prop0', 'prop1', 'prop2']
 const PROP_0 = 0
@@ -125,7 +126,7 @@ describe('TokenizedBallot', async () => {
                 .withArgs(0, VOTE_AMOUNT.toString())
         })
 
-        it.only('adds a VoteLog to the votes array', async () => {
+        it('adds a VoteLog to the votes array', async () => {
             // deployer mint and transfer tokens to acc1
             const mintTx = await myTokenContract.mint(acc1.address, MINT_VALUE)
             await mintTx.wait()
@@ -139,7 +140,7 @@ describe('TokenizedBallot', async () => {
             const delegate2Tx = await myTokenContract.connect(acc2).delegate(acc2.address)
             const txReceipt2 = await delegate2Tx.wait()
             // get block number
-            currentBlock = txReceipt.blockNumber
+            currentBlock = txReceipt2.blockNumber
             // deploy Ballot
             const { TokenizedBallotContract_, TokenizedBallotContractAddress_ } =
                 await loadFixture(deployBallot)
@@ -149,14 +150,15 @@ describe('TokenizedBallot', async () => {
             const voteTx = await tokenizedBallotContract.connect(acc1).vote(PROP_0, VOTE_AMOUNT)
             await voteTx.wait()
             // acc2 casts vote for prop 1
-            // const vote2Tx = await tokenizedBallotContract.connect(acc2).vote(PROP_1, VOTE_AMOUNT)
-            // await vote2Tx.wait()
+            const vote2Tx = await tokenizedBallotContract.connect(acc2).vote(PROP_1, VOTE_AMOUNT)
+            await vote2Tx.wait()
 
-            console.log(await tokenizedBallotContract.votes.length)
+            await expect(tokenizedBallotContract.votes(0)).not.to.be.reverted
+            await expect(tokenizedBallotContract.votes(1)).not.to.be.reverted
 
             // let loop = true
-            // for (let i = 0; (loop = true); i++) {
-            //     const res = await tokenizedBallotContract.votes()
+            // for (let i = 0; loop === true; i++) {
+            //     const res = await tokenizedBallotContract.votes(i)
             //     console.log('res:', res)
             //     if (!res.voter) {
             //         loop = false
