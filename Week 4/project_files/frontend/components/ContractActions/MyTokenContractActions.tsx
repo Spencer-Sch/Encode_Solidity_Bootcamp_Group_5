@@ -1,10 +1,17 @@
 import { useAccount } from 'wagmi'
 import RequestTokens from './RequestTokens'
+import Vote from './Vote'
 
 export default function () {
     const { address, isConnecting, isDisconnected } = useAccount()
 
-    if (address) return <RequestTokens address={{ address }}></RequestTokens>
+    if (address)
+        return (
+            <>
+                <RequestTokens address={{ address }}></RequestTokens>
+                <Vote address={address}></Vote>
+            </>
+        )
 
     if (isConnecting)
         return (
