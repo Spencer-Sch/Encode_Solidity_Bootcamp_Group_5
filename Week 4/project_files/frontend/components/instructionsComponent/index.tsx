@@ -13,9 +13,9 @@ export default function InstructionsComponent() {
                     <h1>VoteDapp</h1>
                 </div>
             </header>
-            <p className={styles.get_started}>
+            <div className={styles.get_started}>
                 <PageBody></PageBody>
-            </p>
+            </div>
         </div>
     )
 }
