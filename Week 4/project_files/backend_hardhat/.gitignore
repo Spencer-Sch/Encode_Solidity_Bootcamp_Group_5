@@ -22,3 +22,4 @@ typechain-types
 cache
 artifacts
 
+dist/
