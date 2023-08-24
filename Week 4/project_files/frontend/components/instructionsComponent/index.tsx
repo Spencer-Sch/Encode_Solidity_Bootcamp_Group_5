@@ -1,7 +1,4 @@
 import styles from './instructionsComponent.module.css'
-import { useAccount, useBalance, useNetwork, useSignMessage } from 'wagmi'
-import { useState, useEffect } from 'react'
-import * as myTokenJson from '@/assets/MyToken.json'
 import WalletInfo from '../WalletComponents/WalletInfo'
 import MyTokenContractActions from '../ContractActions/MyTokenContractActions'
 
@@ -28,35 +25,3 @@ function PageBody() {
         </div>
     )
 }
-
-// function WalletAction() {
-//   const [signatureMessage, setSignatureMessage] = useState("");
-
-//   const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage();
-//   return (
-//     <div>
-//       <form>
-//         <label>
-//           Enter the message to be signed:
-//           <input
-//             type="text"
-//             value={signatureMessage}
-//             onChange={(e) => setSignatureMessage(e.target.value)}
-//           />
-//         </label>
-//       </form>
-//       <button
-//         disabled={isLoading}
-//         onClick={() =>
-//           signMessage({
-//             message: signatureMessage,
-//           })
-//         }
-//       >
-//         Sign Message
-//       </button>
-//       {isSuccess && <div>Signature: {data}</div>}
-//       {isError && <div>Error signing message</div>}
-//     </div>
-//   );
-// }
