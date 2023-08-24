@@ -15,13 +15,13 @@ export default function WalletInfo() {
     if (isConnecting)
         return (
             <>
-                <p> Loading...</p>
+                <p> Loading Wallet Info...</p>
             </>
         )
     if (isDisconnected)
         return (
             <>
-                <p> Wallet Disconnected</p>
+                <p>Wallet Disconnected</p>
             </>
         )
     return (

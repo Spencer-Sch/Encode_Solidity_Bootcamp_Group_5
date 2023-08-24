@@ -11,20 +11,20 @@ export default function () {
             <>
                 <RequestTokens address={address}></RequestTokens>
                 <Delegate address={address}></Delegate>
-                {/* <Vote address={address}></Vote> */}
+                <Vote address={address}></Vote>
             </>
         )
 
     if (isConnecting)
         return (
             <>
-                <p>Loading...</p>
+                <p>Loading Contract Actions...</p>
             </>
         )
     if (isDisconnected)
         return (
             <>
-                <p>Wallet Disconnected</p>
+                <p>No Contract Actions Available</p>
             </>
         )
 }
