@@ -1,5 +1,6 @@
 import { sepolia, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import * as myTokenJSON from '@/assets/MyToken.json'
+import styles from './styles/delegate.module.css'
 
 const myTokenABI = myTokenJSON.abi
 
@@ -31,6 +32,7 @@ export default function Delegate(params: { address: string }) {
 
     return (
         <form
+            className={styles.form}
             onSubmit={(e) => {
                 e.preventDefault()
                 write?.()
@@ -51,7 +53,8 @@ export default function Delegate(params: { address: string }) {
                     </div>
                 </div>
             )}
-            {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>}
+            {isError && <div>Error: {error?.message}</div>}
+            {/* {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>} */}
         </form>
     )
 }

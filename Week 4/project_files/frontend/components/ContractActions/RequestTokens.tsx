@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from './styles/requestToken.module.css'
 
 export default function RequestTokens(params: { address: any }) {
     const [data, setData] = useState<{
@@ -12,37 +13,39 @@ export default function RequestTokens(params: { address: any }) {
 
     const body = { address: params.address }
 
-    if (isLoading) return <p>Requesting tokens from API...</p>
+    if (isLoading) return <p className={styles.container}>Requesting tokens from API...</p>
     if (!data)
         return (
-            <button
-                onClick={() => {
-                    setLoading(true)
-                    fetch('http://localhost:3001/mint-tokens', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body),
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            setData(data)
-                            setLoading(false)
+            <div className={styles.container}>
+                <button
+                    onClick={() => {
+                        setLoading(true)
+                        fetch('http://localhost:3001/mint-tokens', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body),
                         })
-                }}
-            >
-                Request tokens
-            </button>
+                            .then((res) => res.json())
+                            .then((data) => {
+                                setData(data)
+                                setLoading(false)
+                            })
+                    }}
+                >
+                    Request tokens
+                </button>
+            </div>
         )
 
     if (!data.result) {
         return (
-            <div>
+            <div className={styles.container}>
                 <p>Result from API: FAILED!</p>
             </div>
         )
     }
     return (
-        <div>
+        <div className={styles.container}>
             <p>Result from API: WORKED!</p>
             <p>Transaction Hash: {data.tx}</p>
             <p>Mint Tokens to: {data.to}</p>

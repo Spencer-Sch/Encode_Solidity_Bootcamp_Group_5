@@ -3,6 +3,7 @@ import * as ballotJson from '@/assets/TokenizedBallot.json'
 import { useState } from 'react'
 import { parseUnits } from 'viem'
 import { useDebounce } from '@/hooks/useDebounce'
+import styles from './styles/vote.module.css'
 
 const ballotABI = ballotJson.abi
 
@@ -47,8 +48,6 @@ export default function Vote(params: { address: string }) {
                 break
             case 'half':
                 amountBN = parseUnits('0.5', 18)
-                break
-            default:
                 amountBN = parseUnits('1', 18)
         }
         setAmount(amountBN)
@@ -56,14 +55,12 @@ export default function Vote(params: { address: string }) {
 
     return (
         <form
+            className={styles.form}
             onSubmit={(e) => {
                 e.preventDefault()
                 write?.()
             }}
         >
-            <button type="submit" disabled={!write || awaitingTX}>
-                {awaitingTX ? 'Voting...' : 'Vote'}
-            </button>
             <label htmlFor="proposals">Choose a proposal:</label>
             <select
                 disabled={awaitingTX}
@@ -87,6 +84,9 @@ export default function Vote(params: { address: string }) {
                 <option value="one">Full Coin</option>
                 <option value="half">Half Coin</option>
             </select>
+            <button type="submit" disabled={!write || awaitingTX}>
+                {awaitingTX ? 'Voting...' : 'Vote'}
+            </button>
             {loadingWrite && <div>Sign Transaction...</div>}
             {isSuccess && (
                 <div>
@@ -99,7 +99,8 @@ export default function Vote(params: { address: string }) {
                     </div>
                 </div>
             )}
-            {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>}
+            {isError && <div>Error: {error?.message}</div>}
+            {/* {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>} */}
         </form>
     )
 }
