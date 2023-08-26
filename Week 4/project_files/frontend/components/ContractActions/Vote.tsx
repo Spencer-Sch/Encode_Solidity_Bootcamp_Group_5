@@ -60,7 +60,6 @@ export default function Vote(params: { address: string }) {
         break;
       case 'half':
         amountBN = parseUnits('0.5', 18);
-        amountBN = parseUnits('1', 18);
       default:
         amountBN = parseUnits('1', 18);
     }
