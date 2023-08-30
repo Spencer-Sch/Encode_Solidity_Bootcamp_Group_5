@@ -13,34 +13,34 @@ import styles from './styles/vote.module.css'
 
 const ballotABI = ballotJson.abi
 
-export default function Vote(params: { address: string }) {
+export default function Vote(params: { address: string; proposals: string[] | undefined }) {
     const [proposition, setProposition] = useState<number>(0)
     const [amount, setAmount] = useState<bigint>(parseUnits('1', 18))
 
     const debouncedProposition = useDebounce(proposition)
     const debouncedAmount = useDebounce(amount)
 
-    const {
-        data: proposals,
-        isError: readPropNamesError,
-        isLoading: propNamesIsLoading,
-    }: {
-        data: Array<{ name: `0x${string}`; voteCount: bigint }> | undefined
-        isError: boolean
-        isLoading: boolean
-    } = useContractRead({
-        address:
-            (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
-        abi: ballotABI,
-        functionName: 'getProposals',
-        chainId: sepolia.id,
-        onError(error) {
-            console.log('useRead PROPOSALS Error: ', error)
-        },
-        onSuccess(data) {
-            console.log('useRead PROPOSALS Error: ', data)
-        },
-    })
+    // const {
+    //     data: proposals,
+    //     isError: readPropNamesError,
+    //     isLoading: propNamesIsLoading,
+    // }: {
+    //     data: Array<{ name: `0x${string}`; voteCount: bigint }> | undefined
+    //     isError: boolean
+    //     isLoading: boolean
+    // } = useContractRead({
+    //     address:
+    //         (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
+    //     abi: ballotABI,
+    //     functionName: 'getProposals',
+    //     chainId: sepolia.id,
+    //     onError(error) {
+    //         console.log('useRead PROPOSALS Error: ', error)
+    //     },
+    //     onSuccess(data) {
+    //         console.log('useRead PROPOSALS Error: ', data)
+    //     },
+    // })
 
     const {
         config,
@@ -75,14 +75,16 @@ export default function Vote(params: { address: string }) {
                 break
             case 'half':
                 amountBN = parseUnits('0.5', 18)
+                break
             default:
                 amountBN = parseUnits('1', 18)
         }
-        setAmount(amountBN)
+        return amountBN
     }
 
-    function formatOptions(value: `0x${string}`) {
-        return hexToString(value, { size: 32 })
+    // function formatOptions(value: `0x${string}`) {
+    function formatOptions(value: string) {
+        return value
             .split('-')
             .map((word) => word[0].toUpperCase().concat(word.slice(1)))
             .join(' ')
@@ -104,13 +106,20 @@ export default function Vote(params: { address: string }) {
                 id="proposals"
                 onChange={(e) => setProposition(Number(e.target.value))}
             >
-                {!proposals && <option value="0">Loading Proposal Names...</option>}
+                {!params.proposals && <option value="0">Loading Proposal Names...</option>}
+                {params.proposals &&
+                    params.proposals.map((item, idx) => (
+                        <option key={item} value={idx}>
+                            {formatOptions(item)}
+                        </option>
+                    ))}
+                {/* {!proposals && <option value="0">Loading Proposal Names...</option>}
                 {proposals &&
                     proposals.map((item, idx) => (
                         <option key={hexToString(item.name, { size: 32 })} value={idx}>
                             {formatOptions(item.name)}
                         </option>
-                    ))}
+                    ))} */}
             </select>
             <label htmlFor="amount">Choose an amount to vote:</label>
             <select
@@ -118,7 +127,7 @@ export default function Vote(params: { address: string }) {
                 required
                 name="amount"
                 id="amount"
-                onChange={(e) => handleAmountConversion(e.target.value)}
+                onChange={(e) => setAmount(handleAmountConversion(e.target.value))}
             >
                 <option value="one">Full Coin</option>
                 <option value="half">Half Coin</option>
