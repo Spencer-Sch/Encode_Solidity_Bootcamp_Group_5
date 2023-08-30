@@ -43,6 +43,15 @@ button:hover {
     cursor: pointer;
 }
 
+button:disabled {
+    background-color: gray;
+}
+
+button:hover:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
 select {
     padding: 0.5rem;
     font-size: 1rem;
