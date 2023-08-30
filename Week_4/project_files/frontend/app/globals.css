@@ -35,11 +35,17 @@ button {
     color: white;
     border: none;
     outline: none;
+    font-size: 1rem;
 }
 
 button:hover {
     background-color: darkblue;
     cursor: pointer;
+}
+
+select {
+    padding: 0.5rem;
+    font-size: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
