@@ -60,11 +60,35 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
 
     const voteLogs: any = data ? data : []
 
+    if (isLoading) {
+        return (
+            <div className={styles.container}>
+                <p>Loading Previous Votes...</p>
+            </div>
+        )
+    }
+
     if (isSuccess) {
         return (
             <div className={styles.container}>
                 <p>Previous votes:</p>
-                {voteLogs.map((item: voteLog, idx: number) => (
+                {voteLogs.length === 0 ? (
+                    <p>No votes yet. Cast your vote now!</p>
+                ) : (
+                    voteLogs.map((item: voteLog, idx: number) => (
+                        <div className={styles.voteLog} key={`${item.blockNumber}${idx}`}>
+                            <div>
+                                Proposal name:{' '}
+                                {formatOptions(proposalMap.get(Number(item.proposal)))}
+                            </div>
+                            <div>Voter Address: {item.voter}</div>
+                            <div>Vote Amount: {item.amount.toString()}</div>
+                            <div>Block Number: {item.blockNumber.toString()}</div>
+                        </div>
+                    ))
+                )}
+
+                {/* {voteLogs.map((item: voteLog, idx: number) => (
                     <div className={styles.voteLog} key={`${item.blockNumber}${idx}`}>
                         <div>
                             Proposal name: {formatOptions(proposalMap.get(Number(item.proposal)))}
@@ -73,12 +97,19 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
                         <div>Vote Amount: {item.amount.toString()}</div>
                         <div>Block Number: {item.blockNumber.toString()}</div>
                     </div>
-                ))}
+                ))} */}
             </div>
         )
     }
 
     if (isError) {
-        return <div>{isError && <div>Error: {error?.message}</div>}</div>
+        {
+            console.log('VOTE_LOG ERROR: ', error?.message)
+        }
+        return (
+            <div className={styles.container}>
+                {isError && <div>An error has occured. Wait a moment for votes to load.</div>}
+            </div>
+        )
     }
 }
