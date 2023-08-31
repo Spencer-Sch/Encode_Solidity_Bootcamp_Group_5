@@ -1,7 +1,8 @@
-import { sepolia, useContractRead } from 'wagmi'
+import { sepolia, useContractEvent, useContractRead } from 'wagmi'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
-import { hexToString } from 'viem'
+import { Log, hexToString } from 'viem'
 import styles from './styles/voteLog.module.css'
+import { useCallback, useEffect, useState } from 'react'
 
 const ballotABI = ballotJson.abi
 
@@ -11,6 +12,9 @@ type voteLog = { proposal: bigint; voter: `0x${string}`; amount: bigint; blockNu
 // Array<{ proposal: bigint; voter: `0x${string}`, amount: bigint, blockNumber: bigint }> | []
 
 export default function VoteLog(params: { proposals: string[] | undefined }) {
+    const [, updateState] = useState<Log[]>([])
+    const forceUpdate = useCallback((log: Log[]) => updateState(log), [])
+
     const { data, isError, error, isLoading, isSuccess } = useContractRead({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
@@ -24,6 +28,23 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
             console.log('useRead VOTE_LOG Error: ', data)
         },
     })
+
+    useContractEvent({
+        address:
+            (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
+        abi: ballotABI,
+        eventName: 'Vote',
+        listener(log) {
+            console.log('VOTE EVENT LOG: ', log)
+            forceUpdate(log)
+        },
+        chainId: sepolia.id,
+    })
+
+    // useEffect(() => {
+    //     // remove event listener on component unmount
+    //     return unwatch && unwatch()
+    // })
 
     const proposalMap = new Map()
     params.proposals?.forEach((item, idx) => {
