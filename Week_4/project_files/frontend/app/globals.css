@@ -19,8 +19,8 @@ p {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color: blue;
+    text-decoration: underline;
 }
 
 * {
