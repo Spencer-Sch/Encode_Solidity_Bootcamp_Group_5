@@ -51,6 +51,9 @@ export default function RequestTokens(params: { address: any }) {
             <p>Mint Tokens to: {data.to}</p>
             <p>Mint Tokens from: {data.from}</p>
             <p>Gas Used: {data.gasUsed}</p>
+            <a target="_blank" href={`https://etherscan.io/tx/${data?.tx}`}>
+                View On Etherscan
+            </a>
         </div>
     )
 }
