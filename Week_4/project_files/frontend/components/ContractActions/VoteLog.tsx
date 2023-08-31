@@ -26,6 +26,7 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
         },
     })
 
+    // const unwatch = useContractEvent({
     useContractEvent({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
