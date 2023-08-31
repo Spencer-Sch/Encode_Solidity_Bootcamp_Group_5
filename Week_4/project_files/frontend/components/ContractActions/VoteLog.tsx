@@ -1,15 +1,12 @@
 import { sepolia, useContractEvent, useContractRead } from 'wagmi'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
-import { Log, hexToString } from 'viem'
+import { Log } from 'viem'
 import styles from './styles/voteLog.module.css'
 import { useCallback, useEffect, useState } from 'react'
 
 const ballotABI = ballotJson.abi
 
 type voteLog = { proposal: bigint; voter: `0x${string}`; amount: bigint; blockNumber: bigint }
-
-// Array<{ proposal: bigint; voter: `0x${string}`, amount: bigint, blockNumber: bigint }> | undefined
-// Array<{ proposal: bigint; voter: `0x${string}`, amount: bigint, blockNumber: bigint }> | []
 
 export default function VoteLog(params: { proposals: string[] | undefined }) {
     const [, updateState] = useState<Log[]>([])
