@@ -7,8 +7,8 @@ import Footer from '@/components/instructionsComponent/navigation/footer'
 const config = createConfig(
     getDefaultConfig({
         // Required API Keys
-        // alchemyId: process.env.ALCHEMY_API_KEY, // or infuraId
-        infuraId: process.env.INFURA_API_KEY,
+        alchemyId: process.env.ALCHEMY_API_KEY, // or infuraId
+        // infuraId: process.env.INFURA_API_KEY,
         walletConnectProjectId: 'demo',
 
         // Networks
