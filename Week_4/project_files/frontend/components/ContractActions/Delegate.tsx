@@ -53,7 +53,14 @@ export default function Delegate(params: { address: string }) {
                     </div>
                 </div>
             )}
-            {isError && <div>Error: {error?.message}</div>}
+            {isError && (
+                <div>
+                    Error:{' '}
+                    {error?.message.toLowerCase().includes('user rejected')
+                        ? 'User rejected request'
+                        : error?.message}
+                </div>
+            )}
             {/* {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>} */}
         </form>
     )
