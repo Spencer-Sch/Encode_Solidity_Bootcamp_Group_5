@@ -106,7 +106,7 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
         }
         return (
             <div className={styles.container}>
-                {isError && <div>An error has occured. Wait a moment for votes to load.</div>}
+                {isError && <div>An error has occurred. Wait a moment for votes to load.</div>}
             </div>
         )
     }
