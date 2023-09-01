@@ -23,7 +23,7 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
         },
     })
 
-    const unwatch = useContractEvent({
+    useContractEvent({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: ballotABI,
@@ -33,11 +33,6 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
             refetch().catch((error) => console.error('refetch vote logs error: ', error))
         },
         chainId: sepolia.id,
-    })
-
-    useEffect(() => {
-        // remove event listener on component unmount
-        return unwatch && unwatch()
     })
 
     const proposalMap = new Map()
