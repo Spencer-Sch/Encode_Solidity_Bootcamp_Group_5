@@ -1,6 +1,6 @@
 import { sepolia, useContractEvent, useContractRead } from 'wagmi'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
-import { Log } from 'viem'
+import { formatEther } from 'viem'
 import styles from './styles/voteLog.module.css'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -75,13 +75,14 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
                 ) : (
                     voteLogs.map((item: voteLog, idx: number) => (
                         <div className={styles.voteLog} key={`${item.blockNumber}${idx}`}>
+                            <div>Vote #{idx + 1}</div>
                             <div>
                                 Proposal name:{' '}
                                 {formatOptions(proposalMap.get(Number(item.proposal)))}
                             </div>
                             <div>Voter Address: {item.voter}</div>
-                            <div>Vote Amount: {item.amount.toString()}</div>
-                            <div>Block Number: {item.blockNumber.toString()}</div>
+                            <div>Vote Amount: {formatEther(item.amount)} MTK</div>
+                            {/* <div>Block Number: {item.blockNumber.toString()}</div> */}
                         </div>
                     ))
                 )}
