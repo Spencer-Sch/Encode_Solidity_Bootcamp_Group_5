@@ -10,7 +10,6 @@ export default function Delegate(params: { address: string }) {
         error: prepareError,
         isError: isPrepareError,
     } = usePrepareContractWrite({
-        // address: '0xbBAfa95dF21F2AD94f65A71DF988a4284E5E08dD',
         address: (process.env.NEXT_PUBLIC_MY_TOKEN_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: myTokenABI,
         functionName: 'delegate',
@@ -18,10 +17,10 @@ export default function Delegate(params: { address: string }) {
         chainId: sepolia.id,
         account: params.address as `0x${string}`,
         onError(error) {
-            console.log('usePrepare DELEGATE Error: ', error)
+            // console.log('usePrepare DELEGATE Error: ', error)
         },
         onSuccess(data) {
-            console.log('usePrepare DELEGATE Success: ', data)
+            // console.log('usePrepare DELEGATE Success: ', data)
         },
     })
 
