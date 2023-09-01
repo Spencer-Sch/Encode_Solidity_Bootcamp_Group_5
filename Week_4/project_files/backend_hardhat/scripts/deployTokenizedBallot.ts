@@ -3,7 +3,7 @@ import { TokenizedBallot__factory } from '../typechain-types'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-// yarn ts-node --files ./scripts/deployTokenizedBallot.ts historical-fiction self-help fantasy-worlds classic-literature
+// npx ts-node --files ./scripts/deployTokenizedBallot.ts historical-fiction self-help fantasy-worlds classic-literature
 
 function setupProvider() {
     const provider = new ethers.InfuraProvider('sepolia')

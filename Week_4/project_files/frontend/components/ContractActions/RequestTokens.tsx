@@ -32,7 +32,7 @@ export default function RequestTokens(params: { address: any }) {
                             })
                     }}
                 >
-                    Request tokens
+                    Request 1 MTK Token
                 </button>
             </div>
         )
@@ -48,9 +48,12 @@ export default function RequestTokens(params: { address: any }) {
         <div className={styles.container}>
             <p>Result from API: WORKED!</p>
             <p>Transaction Hash: {data.tx}</p>
-            <p>Mint Tokens to: {data.to}</p>
-            <p>Mint Tokens from: {data.from}</p>
+            <p>Mint Tokens to: {data.from}</p>
+            <p>Mint Tokens from: {data.to}</p>
             <p>Gas Used: {data.gasUsed}</p>
+            <a target="_blank" href={`https://sepolia.etherscan.io/tx/${data?.tx}`}>
+                View On Etherscan
+            </a>
         </div>
     )
 }

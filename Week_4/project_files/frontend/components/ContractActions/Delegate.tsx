@@ -10,7 +10,6 @@ export default function Delegate(params: { address: string }) {
         error: prepareError,
         isError: isPrepareError,
     } = usePrepareContractWrite({
-        // address: '0xbBAfa95dF21F2AD94f65A71DF988a4284E5E08dD',
         address: (process.env.NEXT_PUBLIC_MY_TOKEN_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: myTokenABI,
         functionName: 'delegate',
@@ -18,10 +17,10 @@ export default function Delegate(params: { address: string }) {
         chainId: sepolia.id,
         account: params.address as `0x${string}`,
         onError(error) {
-            console.log('usePrepare DELEGATE Error: ', error)
+            // console.log('usePrepare DELEGATE Error: ', error)
         },
         onSuccess(data) {
-            console.log('usePrepare DELEGATE Success: ', data)
+            // console.log('usePrepare DELEGATE Success: ', data)
         },
     })
 
@@ -47,13 +46,20 @@ export default function Delegate(params: { address: string }) {
                     <p>Delegation Succesful!</p>
                     <p>Hash: {JSON.stringify(data?.hash)}</p>
                     <div>
-                        <a target="_blank" href={`https://etherscan.io/tx/${data?.hash}`}>
+                        <a target="_blank" href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>
                             View On Etherscan
                         </a>
                     </div>
                 </div>
             )}
-            {isError && <div>Error: {error?.message}</div>}
+            {isError && (
+                <div>
+                    Error:{' '}
+                    {error?.message.toLowerCase().includes('user rejected')
+                        ? 'User rejected request'
+                        : error?.message}
+                </div>
+            )}
             {/* {(isPrepareError || isError) && <div>Error: {(prepareError || error)?.message}</div>} */}
         </form>
     )
