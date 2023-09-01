@@ -5,6 +5,7 @@ import Vote from './Vote'
 import Delegate from './Delegate'
 import styles from './styles/myTokenContractActions.module.css'
 import VoteLog from './VoteLog'
+import GetWinner from './GetWinner'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
 
 const ballotABI = ballotJson.abi
@@ -42,6 +43,7 @@ export default function () {
                 <RequestTokens address={address}></RequestTokens>
                 <Delegate address={address}></Delegate>
                 <Vote address={address} proposals={proposals}></Vote>
+                <GetWinner></GetWinner>
                 <VoteLog proposals={proposals}></VoteLog>
             </div>
         )
