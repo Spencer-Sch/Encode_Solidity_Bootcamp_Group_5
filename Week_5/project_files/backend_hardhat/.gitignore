@@ -1,5 +1,4 @@
 .yarn/*
-.yarn
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
@@ -14,6 +13,12 @@
 node_modules
 .env
 .prettierrc
+coverage
+coverage.json
+typechain
+typechain-types
 
-dist/
-.DS_Store
+# Hardhat files
+cache
+artifacts
+
