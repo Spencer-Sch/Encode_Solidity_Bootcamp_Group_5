@@ -1,11 +1,11 @@
 import { useAccount, useContractRead, sepolia } from 'wagmi'
+import { hexToString } from 'viem'
 import RequestTokens from './RequestTokens'
 import Vote from './Vote'
 import Delegate from './Delegate'
 import styles from './styles/myTokenContractActions.module.css'
 import VoteLog from './VoteLog'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
-import { hexToString } from 'viem'
 
 const ballotABI = ballotJson.abi
 
@@ -27,10 +27,10 @@ export default function () {
         functionName: 'getProposals',
         chainId: sepolia.id,
         onError(error) {
-            console.log('useRead PROPOSALS Error: ', error)
+            // console.log('useRead PROPOSALS Error: ', error)
         },
         onSuccess(data) {
-            console.log('useRead PROPOSALS Error: ', data)
+            // console.log('useRead PROPOSALS Error: ', data)
         },
     })
 
