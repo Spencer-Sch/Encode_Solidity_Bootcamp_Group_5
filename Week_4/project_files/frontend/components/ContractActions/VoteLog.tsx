@@ -2,32 +2,28 @@ import { sepolia, useContractEvent, useContractRead } from 'wagmi'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
 import { formatEther } from 'viem'
 import styles from './styles/voteLog.module.css'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const ballotABI = ballotJson.abi
 
 type voteLog = { proposal: bigint; voter: `0x${string}`; amount: bigint; blockNumber: bigint }
 
 export default function VoteLog(params: { proposals: string[] | undefined }) {
-    const [, updateState] = useState<Log[]>([])
-    const forceUpdate = useCallback((log: Log[]) => updateState(log), [])
-
-    const { data, isError, error, isLoading, isSuccess } = useContractRead({
+    const { data, isError, error, isLoading, isSuccess, refetch } = useContractRead({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: ballotABI,
         functionName: 'getVoteLog',
         chainId: sepolia.id,
         onError(error) {
-            console.log('useRead VOTE_LOG Error: ', error)
+            // console.log('useRead VOTE_LOG Error: ', error)
         },
-        onSuccess(data) {
-            console.log('useRead VOTE_LOG Error: ', data)
+        onSuccess(data: voteLog[]) {
+            // console.log('useRead VOTE_LOG Error: ', data)
         },
     })
 
-    // const unwatch = useContractEvent({
-    useContractEvent({
+    const unwatch = useContractEvent({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: ballotABI,
@@ -86,17 +82,6 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
                         </div>
                     ))
                 )}
-
-                {/* {voteLogs.map((item: voteLog, idx: number) => (
-                    <div className={styles.voteLog} key={`${item.blockNumber}${idx}`}>
-                        <div>
-                            Proposal name: {formatOptions(proposalMap.get(Number(item.proposal)))}
-                        </div>
-                        <div>Voter Address: {item.voter}</div>
-                        <div>Vote Amount: {item.amount.toString()}</div>
-                        <div>Block Number: {item.blockNumber.toString()}</div>
-                    </div>
-                ))} */}
             </div>
         )
     }
