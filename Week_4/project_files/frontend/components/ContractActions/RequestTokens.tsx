@@ -32,7 +32,7 @@ export default function RequestTokens(params: { address: any }) {
                             })
                     }}
                 >
-                    Request tokens
+                    Request 1 MTK Token
                 </button>
             </div>
         )
