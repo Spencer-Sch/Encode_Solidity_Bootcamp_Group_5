@@ -30,15 +30,15 @@ export default function VoteLog(params: { proposals: string[] | undefined }) {
         eventName: 'Vote',
         listener(log) {
             console.log('VOTE EVENT LOG: ', log)
-            forceUpdate(log)
+            refetch().catch((error) => console.error('refetch vote logs error: ', error))
         },
         chainId: sepolia.id,
     })
 
-    // useEffect(() => {
-    //     // remove event listener on component unmount
-    //     return unwatch && unwatch()
-    // })
+    useEffect(() => {
+        // remove event listener on component unmount
+        return unwatch && unwatch()
+    })
 
     const proposalMap = new Map()
     params.proposals?.forEach((item, idx) => {
