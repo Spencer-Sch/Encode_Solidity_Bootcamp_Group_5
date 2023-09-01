@@ -1,13 +1,19 @@
-.form {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    border-bottom: 1px solid black;
+    height: 25rem;
     padding: 1rem;
+    overflow-y: scroll;
 }
 
-.form * + * {
+.container * + * {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+}
+
+.voteLog {
+    background-color: #a9a9a9;
+    padding: 0.5rem;
 }

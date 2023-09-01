@@ -7,7 +7,6 @@ export default function WalletInfo() {
     if (address)
         return (
             <>
-                <p>Your account address is {address}</p>
                 <p>Connected to the network {chain?.name}</p>
                 <WalletBalance address={address}></WalletBalance>
             </>
