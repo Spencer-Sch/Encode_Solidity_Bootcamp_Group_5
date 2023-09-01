@@ -1,13 +1,7 @@
-import {
-    sepolia,
-    useContractRead,
-    useContractWrite,
-    usePrepareContractWrite,
-    useWaitForTransaction,
-} from 'wagmi'
+import { sepolia, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import * as ballotJson from '@/assets/TokenizedBallot.json'
 import { useState } from 'react'
-import { parseUnits, hexToString } from 'viem'
+import { parseUnits } from 'viem'
 import { useDebounce } from '@/hooks/useDebounce'
 import styles from './styles/vote.module.css'
 
@@ -20,33 +14,7 @@ export default function Vote(params: { address: string; proposals: string[] | un
     const debouncedProposition = useDebounce(proposition)
     const debouncedAmount = useDebounce(amount)
 
-    // const {
-    //     data: proposals,
-    //     isError: readPropNamesError,
-    //     isLoading: propNamesIsLoading,
-    // }: {
-    //     data: Array<{ name: `0x${string}`; voteCount: bigint }> | undefined
-    //     isError: boolean
-    //     isLoading: boolean
-    // } = useContractRead({
-    //     address:
-    //         (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
-    //     abi: ballotABI,
-    //     functionName: 'getProposals',
-    //     chainId: sepolia.id,
-    //     onError(error) {
-    //         console.log('useRead PROPOSALS Error: ', error)
-    //     },
-    //     onSuccess(data) {
-    //         console.log('useRead PROPOSALS Error: ', data)
-    //     },
-    // })
-
-    const {
-        config,
-        error: prepareError,
-        isError: isPrepareError,
-    } = usePrepareContractWrite({
+    const { config } = usePrepareContractWrite({
         address:
             (process.env.NEXT_PUBLIC_TOKENIZED_BALLOT_CONTRACT_ADDRESS as `0x${string}`) ?? '',
         abi: ballotABI,
@@ -55,10 +23,10 @@ export default function Vote(params: { address: string; proposals: string[] | un
         chainId: sepolia.id,
         account: params.address as `0x${string}`,
         onError(error) {
-            console.log('usePrepare VOTE Error: ', error)
+            // console.log('usePrepare VOTE Error: ', error)
         },
         onSuccess(data) {
-            console.log('usePrepare VOTE Success: ', data)
+            // console.log('usePrepare VOTE Success: ', data)
         },
     })
 
@@ -82,7 +50,6 @@ export default function Vote(params: { address: string; proposals: string[] | un
         return amountBN
     }
 
-    // function formatOptions(value: `0x${string}`) {
     function formatOptions(value: string) {
         return value
             .split('-')
@@ -113,13 +80,6 @@ export default function Vote(params: { address: string; proposals: string[] | un
                             {formatOptions(item)}
                         </option>
                     ))}
-                {/* {!proposals && <option value="0">Loading Proposal Names...</option>}
-                {proposals &&
-                    proposals.map((item, idx) => (
-                        <option key={hexToString(item.name, { size: 32 })} value={idx}>
-                            {formatOptions(item.name)}
-                        </option>
-                    ))} */}
             </select>
             <label htmlFor="amount">Choose an amount to vote:</label>
             <select
