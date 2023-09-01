@@ -22,3 +22,5 @@ typechain-types
 cache
 artifacts
 
+dist/
+.DS_Store
