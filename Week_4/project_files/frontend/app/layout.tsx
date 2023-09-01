@@ -2,14 +2,13 @@
 import { WagmiConfig, createConfig, sepolia, mainnet } from 'wagmi'
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit'
 import Navbar from '@/components/instructionsComponent/navigation/navbar'
-import Footer from '@/components/instructionsComponent/navigation/footer'
+// import Footer from '@/components/instructionsComponent/navigation/footer'
 
 const config = createConfig(
     getDefaultConfig({
         // Required API Keys
-        alchemyId: process.env.ALCHEMY_API_KEY, // or infuraId
-        // infuraId: process.env.INFURA_API_KEY,
-        walletConnectProjectId: 'demo',
+        alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY ?? '',
+        walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? '',
 
         // Networks
         chains: [sepolia, mainnet],
@@ -39,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         >
                             <Navbar />
                             <div style={{ flexGrow: 1 }}>{children}</div>
-                            <Footer />
+                            {/* <Footer /> */}
                         </div>
                     </body>
                 </ConnectKitProvider>
