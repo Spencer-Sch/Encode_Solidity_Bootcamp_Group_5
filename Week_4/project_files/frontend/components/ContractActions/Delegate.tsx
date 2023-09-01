@@ -46,7 +46,7 @@ export default function Delegate(params: { address: string }) {
                     <p>Delegation Succesful!</p>
                     <p>Hash: {JSON.stringify(data?.hash)}</p>
                     <div>
-                        <a target="_blank" href={`https://etherscan.io/tx/${data?.hash}`}>
+                        <a target="_blank" href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>
                             View On Etherscan
                         </a>
                     </div>

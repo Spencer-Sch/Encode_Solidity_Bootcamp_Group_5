@@ -101,7 +101,7 @@ export default function Vote(params: { address: string; proposals: string[] | un
                     <p>Vote Succesful!</p>
                     <p>Hash: {JSON.stringify(data?.hash)}</p>
                     <div>
-                        <a target="_blank" href={`https://etherscan.io/tx/${data?.hash}`}>
+                        <a target="_blank" href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>
                             View On Etherscan
                         </a>
                     </div>
