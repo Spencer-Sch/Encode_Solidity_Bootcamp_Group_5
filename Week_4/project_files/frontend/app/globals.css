@@ -4,6 +4,7 @@ html,
 body {
     font-family: 'Rubik';
     font-weight: normal;
+    background-color: #d8dfee;
 }
 h1 {
     margin-bottom: 1rem;
