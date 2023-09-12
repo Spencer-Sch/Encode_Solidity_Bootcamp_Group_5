@@ -18,8 +18,6 @@
 ## Project cmds
 
 -   Deploy `ERC20Votes.sol` to sepolioa testnet <br>
-    `???`
+    `npx ts-node ./scripts/deployMyToken.ts`
 -   Deploy `TokenizedBallot.sol` to sepolioa testnet <br>
     `yarn ts-node --files ./scripts/DeployWithEthers.ts op1 op2 op3`
--   Run `ScriptName` <br>
-    `???`
