@@ -2,7 +2,7 @@
 
 ### Set-up your .env
 
-Add all missing keys/ids listed in `.env.example` to your `.env`
+Add all missing keys/ids/addresses listed in `.env.example` to your `.env`
 
 ### installation
 
