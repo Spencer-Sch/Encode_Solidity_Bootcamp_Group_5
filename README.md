@@ -8,4 +8,3 @@ This repo is where our group will be coordinating our homework projects.
 - [Week 2 Homework](./Week_2/README.md)
 - [Week 3 Homework](./Week_3/README.md)
 - [Week 4 Homework](./Week_4/README.md)
-- [Week 5 Homework](./Week_5/README.md)
